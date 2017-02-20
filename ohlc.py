@@ -35,14 +35,14 @@ def get_earnings_data(date, symbol="QQQ"):
             if len(tr.contents[1].contents) > 0:
                 if tr.contents[1].contents[0].name == "a":
                     if tr.contents[1].contents[0]["href"].startswith("http://finance.yahoo.com/q?s="):
-                        if  tr.contents[1].contents[0].text == symbol:
+                        if tr.contents[1].contents[0].text == symbol:
                             quotes.append({     "date"  : date
                                                ,"name"  : tr.contents[0].text
                                                ,"symbol": tr.contents[1].contents[0].text
                                                ,"url"   : tr.contents[1].contents[0]["href"]
                                                ,"eps"   : tr.contents[2].text if len(tr.contents) == 6 else u'N/A'
                                                ,"time"  : tr.contents[3].text if len(tr.contents) == 6 else tr.contents[2].text
-                                           })
+                                          })
                             break
     return quotes
 
