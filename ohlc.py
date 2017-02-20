@@ -9,6 +9,7 @@ import datetime
 import requests
 import bs4
 import pprint
+import time
 
 
 def init_argparse():
@@ -45,12 +46,17 @@ def main(argv):
     print('Begin run...')
     args = init_argparse()
 
-    ed = get_earnings_data("20170221", "WMT")
-    print(ed)
+    el = []
+    bdatelist = pd.bdate_range("20170101", pd.datetime.today() ).tolist()
+    for bd in bdatelist:
+        sdate = str(bd.year) + "{:02}".format(bd.month) + "{:02}".format(bd.day)
+        print("checking: " + sdate)
+        ed = get_earnings_data(sdate, "WMT")
+        if len(ed) > 0:
+            el.append(ed)
+        time.sleep(2)
 
-    print()
-
-    pprint.pprint(ed[0])
+    print(el)
 
     print('End run.')
     return 0
