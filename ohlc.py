@@ -10,6 +10,7 @@ import requests
 import bs4
 import pprint
 import time
+import random
 
 
 def init_argparse():
@@ -51,6 +52,7 @@ def main(argv):
     print('Begin run...')
     args = init_argparse()
 
+    sleep_times = [0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00]
     el = []
     bdatelist = pd.bdate_range(args.startDate, args.endDate).tolist()
     # bdatelist = pd.bdate_range("20070201", pd.datetime.today() ).tolist()
@@ -62,7 +64,7 @@ def main(argv):
         if len(ed) > 0:
             el.append(ed)
             f.write(sdate + '\n')
-        time.sleep(0.25)
+        time.sleep(random.choice(sleep_times))
     f.close()
     print(el)
 
