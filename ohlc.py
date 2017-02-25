@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 
+from __future__ import print_function
 import sys
 import argparse
 import pandas as pd
@@ -59,13 +60,15 @@ def main(argv):
     f = open(args.outfile, 'wb')
     for bd in bdatelist:
         sdate = str(bd.year) + "{:02}".format(bd.month) + "{:02}".format(bd.day)
-        print("checking: " + sdate)
+        print("checking: " + sdate, end='\r')
+        sys.stdout.flush()
         ed = get_earnings_data(sdate, args.symbol)
         if len(ed) > 0:
             el.append(ed)
             f.write(sdate + '\n')
         time.sleep(random.choice(sleep_times))
     f.close()
+    print('')
     print(el)
 
     print('End run.')
