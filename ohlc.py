@@ -50,6 +50,7 @@ def get_earnings_data(date, symbol="QQQ"):
 
 
 def main(argv):
+    print('Begin run...')
     args = init_argparse()
 
     sleep_times = [0.25, 0.50, 0.75, 1.00, 1.25, 1.50, 1.75, 2.00]
@@ -69,11 +70,10 @@ def main(argv):
     f.close()
     print('')
     print(el)
+    print('End run.')
 
     return 0
 
 
 if __name__ == "__main__":
-    print('Begin run...')
     sys.exit(main(sys.argv))
-    print('End run.')
